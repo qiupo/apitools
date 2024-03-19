@@ -45,14 +45,13 @@ class Music(Plugin):
                 song_url = url
             else:
                 content = "找不到歌曲😮‍💨"
-                logger.info("点歌 reply --> {}, url:{}".format(reply, url))
+                logger.info("点歌 reply --> {}, url:{}".format(msg, url))
         elif query.startswith(f"推荐"):
             chat = Bridge().get_bot("chat")
-            all_sessions = chat.sessions
 
             reply = chat.reply(query + " 以歌名 - 歌手的格式回复", e_context["context"])
             logger.info("music receive => query:{}, reply:{}".format(query, reply))
-            logger.info("")
+
             url, name, ar = self.search_song(reply.content)
             song_name = "{} - {}".format(name, ar)
             if self.is_valid_url(url):
@@ -60,6 +59,8 @@ class Music(Plugin):
                 song_url = url
             else:
                 content = reply.content + "\n----------\n找不到相关歌曲😮‍💨"
+                logger.info("点歌 reply --> {}, url:{}".format(reply.content, url))
+
         else:
             return
         self._send_info(e_context, content, ReplyType.TEXT)
