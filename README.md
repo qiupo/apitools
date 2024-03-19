@@ -4,6 +4,9 @@
 - [x] 点歌/找歌并发送音乐文件
 
 ### 使用方式
+
+#### 命令安装
+`#installp https://github.com/qiupo/apiMusic.git`
 #### 插件集成
 1. 把项目解压到chatgpt-on-wechat/plugins/apiMusic/ 目录下
 2. 安装插件的依赖
@@ -12,7 +15,6 @@ cd /chatgpt-on-wechat/plugins/plugin_music/
 pip3 install -r requirements.txt
 ```
 3. 重新启动chatgpt-on-wechat
-
 #### 触发
 
 - 点歌: `点歌 可惜我是水瓶座`
