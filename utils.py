@@ -5,6 +5,7 @@ import requests
 import re
 from bridge.reply import Reply, ReplyType
 from urllib.parse import urlparse
+from plugins.event import EventContext
 
 
 class Utils:
