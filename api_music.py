@@ -11,6 +11,7 @@ import re
 from bridge.reply import Reply, ReplyType
 from urllib.parse import urlparse
 
+
 @plugins.register(
     name="Music",
     desire_priority=200,
@@ -33,7 +34,7 @@ class Music(Plugin):
         logger.info("content => " + query)
         content = ""
         song_url = ""
-        song_name= ""
+        song_name = ""
         if query.startswith(f"点歌") or query.startswith(f"找歌"):
             msg = query.replace("点歌", "")
             msg = query.replace("找歌", "")
@@ -65,40 +66,39 @@ class Music(Plugin):
             return
         self._send_info(e_context, content, ReplyType.TEXT)
 
-
         if self.is_valid_url(song_url):
-            self._save_mp3_tempfile(song_url,e_context,song_name)
+            self._save_mp3_tempfile(song_url, e_context, song_name)
         e_context.action = EventAction.BREAK_PASS
         return
-    
-    def _save_mp3_tempfile(self,url,e_context,song_name):
-        # 音频文件的URL
- 
+
+    def _save_mp3_tempfile(self, url, e_context, song_name):
         # 使用requests获取音频内容
         response = requests.get(url)
-        
+
         # 检查请求是否成功
         if response.status_code == 200:
 
             # 获取文件名和扩展名
             file_name, file_ext = os.path.splitext(urlparse(url).path)
-            with tempfile.NamedTemporaryFile(prefix=song_name+'.',suffix=file_ext, delete=False) as f:
+            with tempfile.NamedTemporaryFile(
+                prefix=song_name + ".", suffix=file_ext, delete=False
+            ) as f:
                 # 写入临时文件
                 f.write(response.content)
                 # 获取临时文件的路径
                 temp_file_path = f.name
-    
-            print(file_name,file_ext)
 
-            print(f'音频文件已保存到临时文件: {temp_file_path}')
+            print(file_name, file_ext)
+
+            print(f"音频文件已保存到临时文件: {temp_file_path}")
             self._send_info(e_context, temp_file_path, ReplyType.VOICE)
-            return 
+            return
         else:
-            print('无法下载音频文件')
+            print("无法下载音频文件")
             self._send_info(e_context, url, ReplyType.TEXT)
-            return 
+            return
 
-    def _send_info(self,e_context: EventContext, content: str, type):
+    def _send_info(self, e_context: EventContext, content: str, type):
         reply = Reply(type, content)
         channel = e_context["channel"]
         channel.send(reply, e_context["context"])
@@ -118,8 +118,8 @@ class Music(Plugin):
         data = {"name": s, "y": 1, "n": 1, "apiKey": self.apiKey}
         url = "https://api.linhun.vip/api/qqyy"
         # +'?name='+s+'&y=1&n=1&apiKey='+self.apiKey
-        resp,code = self.request(url,data)
-        logger.info("search song resp json:{}-{}".format(resp,code))
+        resp, code = self.request(url, data)
+        logger.info("search song resp json:{}-{}".format(resp, code))
         # logger.info("search song resp json:{},{}".format(response))
         if code == 200:
             if resp["code"] == 200:
@@ -130,8 +130,9 @@ class Music(Plugin):
                 )
         else:
             logger.error("search song buss code:{}, resp:{}".format(resp["code"], resp))
+        return {code: ""}
 
-    def is_valid_url(self,url):
+    def is_valid_url(self, url):
         pattern = re.compile(
             r"^(?:http|ftp)s?://"  # http:// or https://
             r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"  # domain...
@@ -162,22 +163,10 @@ class Music(Plugin):
                 return url, name, ar
             else:
                 logger.error("song not found")
+                return "", "", ""
+
         else:
             logger.error(
                 "search buss code not 200, code:{}, resp:{}".format(resp["code"], resp)
             )
         return "", "", ""
-
-    def query_song_url(self, id):
-        urlRes = self.api.song_url([str(id)])
-        if urlRes["code"] == 200:
-            data = urlRes["data"]
-            if len(data) > 0:
-                url = data[0]["url"]
-                print("url => {}".format(url))
-                return url
-            else:
-                logger.info("query url data length is zero")
-        else:
-            logger.info("query url buss code not 200, code:{}".format(urlRes["code"]))
-        return ""
