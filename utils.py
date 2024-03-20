@@ -68,7 +68,7 @@ class Utils:
             logging.error("参数缺失, code:{}, resp:{}".format(resp["code"], resp))
         return title, subtitle, update_time, data
 
-    def _save_mp3_tempfile(self, url, e_context, song_name):
+    def _save_mp3_tempfile(self, url, song_name):
         logging.info("开始下载音频文件...{}".format(url))
         # 使用requests获取音频内容
         response = requests.get(url)
@@ -90,12 +90,12 @@ class Utils:
             print(file_name, file_ext)
             logging.info("file: {}".format(temp_file_path))
             print(f"音频文件已保存到临时文件: {temp_file_path}")
-            self._send_info(e_context, temp_file_path, ReplyType.VOICE)
-            return
+            # self._send_info(e_context, temp_file_path, ReplyType.VOICE)
+            return temp_file_path, True
         else:
             print("无法下载音频文件")
-            self._send_info(e_context, url, ReplyType.TEXT)
-            return
+            # self._send_info(e_context, url, ReplyType.TEXT)
+            return url, False
 
     def _send_info(self, e_context: EventContext, content: str, type):
         reply = Reply(type, content)
