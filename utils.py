@@ -29,7 +29,7 @@ class Utils:
         data = {"name": song_info, "y": 1, "n": 1, "apiKey": self.song_key}
         url = "https://api.linhun.vip/api/qqyy"
         resp = self.search(data, url)
-        logging.error("search api, code:{}, resp:{}".format(resp["code"], resp))
+        logging.info("search api, code:{}, resp:{}".format(resp["code"], resp))
         if resp["code"] is not None and resp["code"] == 200:
             url = ""
             name = ""
@@ -50,7 +50,7 @@ class Utils:
         data = {"type": type, "apiKey": self.rb_key}
         url = "https://api.linhun.vip/api/jhrsrb"
         resp = self.search(data, url)
-        logging.error("search api, code:{}, resp:{}".format(resp["code"], resp))
+        logging.info("search api, code:{}, resp:{}".format(resp["code"], resp))
         data = []
         title = "暂无"
         subtitle = "暂无"
@@ -73,6 +73,7 @@ class Utils:
         # 使用requests获取音频内容
         response = requests.get(url)
 
+        logging.info("save response status code: {}".format(response.status_code))
         # 检查请求是否成功
         if response.status_code == 200:
 
@@ -87,7 +88,7 @@ class Utils:
                 temp_file_path = f.name
 
             print(file_name, file_ext)
-
+            logging.info("file: {}".format(temp_file_path))
             print(f"音频文件已保存到临时文件: {temp_file_path}")
             self._send_info(e_context, temp_file_path, ReplyType.VOICE)
             return
