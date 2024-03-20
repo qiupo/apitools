@@ -109,7 +109,7 @@ class ApiTools(Plugin):
                     update_time,
                     "\n".join(
                         [
-                            "{}. {}-{}\n{}\n{}".format(
+                            "{}. {}-{}\n{}\n{}\n".format(
                                 index + 1,
                                 item["title"],
                                 item["createdAt"],

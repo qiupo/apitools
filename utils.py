@@ -111,7 +111,7 @@ class Utils:
 
         return resp.json(), 200
 
-    def search(self, data={}, url="https://api.linhun.vip/api/qqyy"):
+    def search(self, data, url: str):
         logging.info("search data:{}".format(data, url))
         resp, code = self.request(url, data)
         logging.info("search resp json:{}-{}".format(resp, code))
