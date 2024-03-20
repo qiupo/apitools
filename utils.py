@@ -46,7 +46,7 @@ class Utils:
             return "", "", ""
 
     def search_rb(self, type):
-        print(type)
+        print(type, self.rb_key)
         data = {"type": type, "apiKey": self.rb_key}
         url = "https://api.linhun.vip/api/jhrsrb"
         resp = self.search(data, url)
