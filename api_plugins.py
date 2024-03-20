@@ -8,7 +8,7 @@ from bridge.reply import Reply, ReplyType
 
 
 @plugins.register(
-    name="apiTools",
+    name="apitools",
     desire_priority=200,
     hidden=True,
     desc="基于网络接口的插件",
