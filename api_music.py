@@ -124,7 +124,9 @@ class Music(Plugin):
         if code == 200:
             return resp
         else:
-            logging.error("search song buss code:{}, resp:{}".format(resp["code"], resp))
+            logging.error(
+                "search song buss code:{}, resp:{}".format(resp["code"], resp)
+            )
             return {code: ""}
 
     def is_valid_url(self, url):
@@ -149,19 +151,24 @@ class Music(Plugin):
     def search_song(self, song_info):
         print(song_info)
         resp = self.search(song_info)
-        if resp["code"] == 200:
-            songid = resp["id"]
+        logger.error("search api, code:{}, resp:{}".format(resp["code"], resp))
+        if (
+            resp["code"] == 200
+            and resp["name"] is not None
+            and resp["mp3"] is not None
+            and resp["author"] is not None
+        ):
+            # songid = resp["id"]
             name = resp["name"]
             ar = resp["author"]
             url = resp["mp3"]
-            if songid is not None:
+            if url is not None:
                 return url, name, ar
             else:
                 logger.error("song not found")
                 return "", "", ""
-
         else:
             logger.error(
-                "search buss code not 200, code:{}, resp:{}".format(resp["code"], resp)
+                "参数缺失, code:{}, resp:{}".format(resp["code"], resp)
             )
         return "", "", ""
