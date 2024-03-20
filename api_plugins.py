@@ -4,8 +4,8 @@ from plugins import *
 from bridge.bridge import Bridge
 from bridge.context import ContextType
 from .utils import Utils
-from bridge.reply import Reply, ReplyType
-
+from bridge.reply import ReplyType
+from plugins.event import EventContext, EventAction
 
 @plugins.register(
     name="apitools",
