@@ -109,11 +109,9 @@ class ApiTools(Plugin):
                     update_time,
                     "\n".join(
                         [
-                            "{}. {}-{}\n{}\n{}\n".format(
+                            "{}. {}\n{}\n".format(
                                 index + 1,
                                 item["title"],
-                                item["createdAt"],
-                                item["other"],
                                 item["mobilUrl"],
                             )
                             for index, item in enumerate(data)
