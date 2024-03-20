@@ -92,7 +92,6 @@ class ApiTools(Plugin):
             if rb_data.__len__ == 0:
                 content = "暂无相关数据"
             else:
-                logging.info("search data --> {}".format(rb_data))
                 content = "{}{}{}\n{}".format(
                     rb_data["title"],
                     rb_data["subtitle"],
