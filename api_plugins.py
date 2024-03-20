@@ -97,6 +97,9 @@ class ApiTools(Plugin):
                 title, subtitle, update_time, data = self.utils.search_rb(
                     self.utils.rb_types["少数派头条"]
                 )
+            logging.info(
+                "search rb --> {}{}{}{}".format(data, title, subtitle, update_time)
+            )
             if data.__len__ == 0:
                 content = "暂无相关数据"
             else:
