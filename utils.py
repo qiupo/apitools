@@ -66,7 +66,7 @@ class Utils:
                 update_time = resp["update_time"]
         else:
             logging.error("参数缺失, code:{}, resp:{}".format(resp["code"], resp))
-        return data, title, subtitle, update_time
+        return title, subtitle, update_time, data
 
     def _save_mp3_tempfile(self, url, e_context, song_name):
         # 使用requests获取音频内容
