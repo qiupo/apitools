@@ -68,34 +68,42 @@ class ApiTools(Plugin):
             or self.utils.has_str(query, "哔哩哔哩全站日榜")
             or self.utils.has_str(query, "少数派头条")
         ):
-            rb_data = {
-                "title": "暂无",
-                "subtitle": "暂无",
-                "update_time": "暂无",
-                "data": [],
-            }
             logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
             if self.utils.has_str(query, "知乎热榜"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["知乎热榜"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["知乎热榜"]
+                )
             elif self.utils.has_str(query, "微博热搜"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["微博热搜"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["微博热搜"]
+                )
             elif self.utils.has_str(query, "百度热点"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["百度热点"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["百度热点"]
+                )
             elif self.utils.has_str(query, "历史上的今天"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["历史上的今天"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["历史上的今天"]
+                )
             elif self.utils.has_str(query, "哔哩哔哩热搜"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["哔哩哔哩热搜"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["哔哩哔哩热搜"]
+                )
             elif self.utils.has_str(query, "哔哩哔哩全站日榜"):
-                rb_data = self.utils.search_rb(self.utils.rb_types["哔哩哔哩全站日榜"])
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["哔哩哔哩全站日榜"]
+                )
             else:
-                rb_data = self.utils.search_rb(self.utils.rb_types["少数派头条"])
-            if rb_data.__len__ == 0:
+                title, subtitle, update_time, data = self.utils.search_rb(
+                    self.utils.rb_types["少数派头条"]
+                )
+            if data.__len__ == 0:
                 content = "暂无相关数据"
             else:
                 content = "{}{}{}\n{}".format(
-                    rb_data["title"],
-                    rb_data["subtitle"],
-                    rb_data["update_time"],
+                    title,
+                    subtitle,
+                    update_time,
                     "\n".join(
                         [
                             "{}. {}-{}\n{}\n{}".format(
@@ -105,7 +113,7 @@ class ApiTools(Plugin):
                                 item["other"],
                                 item["mobilUrl"],
                             )
-                            for index, item in enumerate(rb_data["data"])
+                            for index, item in enumerate(data)
                         ]
                     ),
                 )
