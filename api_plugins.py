@@ -3,7 +3,7 @@ import plugins
 from plugins import *
 from bridge.bridge import Bridge
 from bridge.context import ContextType
-from utils import Utils
+from .utils import Utils
 from bridge.reply import Reply, ReplyType
 
 
@@ -15,14 +15,14 @@ from bridge.reply import Reply, ReplyType
     version="0.2",
     author="qiupo",
 )
-class Music(Plugin):
+class ApiTools(Plugin):
     def __init__(self):
         super().__init__()
         self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
         self.apiKey = "b932144bab6bb6827457707e59455136"
         self.rbKey = "fc4579fece2c9773255a5dbc13c6b229"
         self.utils = Utils(self.apiKey, self.rbKey)
-        logging.info("[Music] inited")
+        logging.info("[apitools] inited")
 
     def on_handle_context(self, e_context: EventContext):
         if e_context["context"].type not in [ContextType.TEXT]:
