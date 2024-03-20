@@ -114,7 +114,7 @@ class ApiTools(Plugin):
                                 item["title"],
                                 item["mobilUrl"] if item["mobilUrl"] else item["url"],
                             )
-                            for index, item in enumerate(data[0,10])
+                            for index, item in enumerate(data) if index < 10
                         ]
                     ),
                 )
