@@ -112,9 +112,9 @@ class ApiTools(Plugin):
                             "{}. {}\n{}\n".format(
                                 index + 1,
                                 item["title"],
-                                item["mobilUrl"],
+                                item["mobilUrl"] if item["mobilUrl"] else item["url"],
                             )
-                            for index, item in enumerate(data)
+                            for index, item in enumerate(data[0,10])
                         ]
                     ),
                 )
