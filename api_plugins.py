@@ -8,7 +8,7 @@ from bridge.reply import Reply, ReplyType
 
 
 @plugins.register(
-    name="Music",
+    name="apitools",
     desire_priority=200,
     hidden=True,
     desc="基于网络接口搜索音乐的插件",
@@ -119,11 +119,11 @@ class Music(Plugin):
         help_text += "点歌/找歌\n"
         help_text += " 找歌 可惜我是水瓶座 杨千嬅"
         help_text += "搜索热榜\n"
-        help_text += "知乎热榜"
-        help_text += "微博热搜"
-        help_text += "百度热点"
-        help_text += "历史上的今天"
-        help_text += "哔哩哔哩热搜"
-        help_text += "哔哩哔哩全站日榜"
-        help_text += "少数派头条"
+        help_text += "知乎热榜\n"
+        help_text += "微博热搜\n"
+        help_text += "百度热点\n"
+        help_text += "历史上的今天\n"
+        help_text += "哔哩哔哩热搜\n"
+        help_text += "哔哩哔哩全站日榜\n"
+        help_text += "少数派头条\n"
         return help_text
