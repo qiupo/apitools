@@ -122,15 +122,10 @@ class Music(Plugin):
         logger.info("search song resp json:{}-{}".format(resp, code))
         # logger.info("search song resp json:{},{}".format(response))
         if code == 200:
-            if resp["code"] == 200:
-                return resp
-            else:
-                logging.error(
-                    "search song buss code:{}, resp:{}".format(resp["code"], resp)
-                )
+            return resp
         else:
-            logger.error("search song buss code:{}, resp:{}".format(resp["code"], resp))
-        return {code: ""}
+            logging.error("search song buss code:{}, resp:{}".format(resp["code"], resp))
+            return {code: ""}
 
     def is_valid_url(self, url):
         pattern = re.compile(
