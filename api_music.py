@@ -4,7 +4,6 @@ import tempfile
 import requests
 import plugins
 from plugins import *
-from common.log import logger
 from bridge.bridge import Bridge
 from bridge.context import ContextType
 import re
@@ -25,13 +24,13 @@ class Music(Plugin):
         super().__init__()
         self.handlers[Event.ON_HANDLE_CONTEXT] = self.on_handle_context
         self.apiKey = "b932144bab6bb6827457707e59455136"
-        logger.info("[Music] inited")
+        logging.info("[Music] inited")
 
     def on_handle_context(self, e_context: EventContext):
         if e_context["context"].type not in [ContextType.TEXT]:
             return
         query = e_context["context"].content
-        logger.info("content => " + query)
+        logging.info("content => " + query)
         content = ""
         song_url = ""
         song_name = ""
@@ -46,12 +45,12 @@ class Music(Plugin):
                 song_url = url
             else:
                 content = "找不到歌曲😮‍💨"
-                logger.info("点歌 reply --> {}, url:{}".format(msg, url))
+                logging.info("点歌 reply --> {}, url:{}".format(msg, url))
         elif query.startswith(f"推荐"):
             chat = Bridge().get_bot("chat")
 
             reply = chat.reply(query + " 以歌名 - 歌手的格式回复", e_context["context"])
-            logger.info("music receive => query:{}, reply:{}".format(query, reply))
+            logging.info("music receive => query:{}, reply:{}".format(query, reply))
 
             url, name, ar = self.search_song(reply.content)
             song_name = "{} - {}".format(name, ar)
@@ -60,7 +59,7 @@ class Music(Plugin):
                 song_url = url
             else:
                 content = reply.content + "\n----------\n找不到相关歌曲😮‍💨"
-                logger.info("点歌 reply --> {}, url:{}".format(reply.content, url))
+                logging.info("点歌 reply --> {}, url:{}".format(reply.content, url))
 
         else:
             return
@@ -119,8 +118,8 @@ class Music(Plugin):
         url = "https://api.linhun.vip/api/qqyy"
         # +'?name='+s+'&y=1&n=1&apiKey='+self.apiKey
         resp, code = self.request(url, data)
-        logger.info("search song resp json:{}-{}".format(resp, code))
-        # logger.info("search song resp json:{},{}".format(response))
+        logging.info("search song resp json:{}-{}".format(resp, code))
+        # logging.info("search song resp json:{},{}".format(response))
         if code == 200:
             return resp
         else:
@@ -151,24 +150,18 @@ class Music(Plugin):
     def search_song(self, song_info):
         print(song_info)
         resp = self.search(song_info)
-        logger.error("search api, code:{}, resp:{}".format(resp["code"], resp))
-        if (
-            resp["code"] == 200
-            and resp["name"] is not None
-            and resp["mp3"] is not None
-            and resp["author"] is not None
-        ):
-            # songid = resp["id"]
-            name = resp["name"]
-            ar = resp["author"]
-            url = resp["mp3"]
-            if url is not None:
-                return url, name, ar
-            else:
-                logger.error("song not found")
-                return "", "", ""
+        logging.error("search api, code:{}, resp:{}".format(resp["code"], resp))
+        if resp["code"] is not None and resp["code"] == 200:
+            url = ""
+            name = ""
+            ar = ""
+            if resp["mp3"] is not None:
+                url = resp["mp3"]
+            if resp["name"] is not None:
+                name = resp["name"]
+            if resp["author"] is not None:
+                ar = resp["author"]
+            return url, name, ar
         else:
-            logger.error(
-                "参数缺失, code:{}, resp:{}".format(resp["code"], resp)
-            )
-        return "", "", ""
+            logging.error("参数缺失, code:{}, resp:{}".format(resp["code"], resp))
+            return "", "", ""
