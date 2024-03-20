@@ -120,9 +120,9 @@ class ApiTools(Plugin):
                 )
         else:
             return
+        logging.info("song_url:{}".format(song_url))
         self.utils._send_info(e_context, content, ReplyType.TEXT)
 
-        logging.info("song_url:{}".format(song_url))
         if self.utils.is_valid_url(song_url):
             self.utils._save_mp3_tempfile(song_url, e_context, song_name)
         e_context.action = EventAction.BREAK_PASS
