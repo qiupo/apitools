@@ -73,8 +73,8 @@ class ApiTools(Plugin):
                 "update_time": "暂无",
                 "data": [],
             }
+            logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
             if self.utils.has_str(query, "知乎热榜"):
-                logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
                 rb_data = self.utils.search_rb(self.utils.rb_types["知乎热榜"])
             elif self.utils.has_str(query, "微博热搜"):
                 rb_data = self.utils.search_rb(self.utils.rb_types["微博热搜"])
@@ -88,6 +88,7 @@ class ApiTools(Plugin):
                 rb_data = self.utils.search_rb(self.utils.rb_types["哔哩哔哩全站日榜"])
             else:
                 rb_data = self.utils.search_rb(self.utils.rb_types["少数派头条"])
+            logging.info("search data --> {}".format(rb_data))
             content = "{}{}{}\n{}".format(
                 rb_data["title"],
                 rb_data["subtitle"],

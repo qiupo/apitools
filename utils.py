@@ -51,11 +51,11 @@ class Utils:
         url = "https://api.linhun.vip/api/jhrsrb"
         resp = self.search(data, url)
         logging.error("search api, code:{}, resp:{}".format(resp["code"], resp))
+        data = []
+        title = "暂无"
+        subtitle = "暂无"
+        update_time = "暂无"
         if resp["code"] is not None and resp["code"] == 200:
-            data = []
-            title = "暂无"
-            subtitle = "暂无"
-            update_time = "暂无"
             if resp["data"] is not None:
                 data = resp["data"]
             if resp["title"] is not None:
@@ -64,10 +64,9 @@ class Utils:
                 subtitle = resp["subtitle"]
             if resp["update_time"] is not None:
                 update_time = resp["update_time"]
-            return data, title, subtitle, update_time
         else:
             logging.error("参数缺失, code:{}, resp:{}".format(resp["code"], resp))
-            return "", "", ""
+        return data, title, subtitle, update_time
 
     def _save_mp3_tempfile(self, url, e_context, song_name):
         # 使用requests获取音频内容
