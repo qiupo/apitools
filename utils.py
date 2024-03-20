@@ -26,7 +26,7 @@ class Utils:
 
     def search_song(self, song_info):
         print(song_info)
-        data = {"name": name, "y": 1, "n": 1, "apiKey": self.song_key}
+        data = {"name": song_info, "y": 1, "n": 1, "apiKey": self.song_key}
         url = "https://api.linhun.vip/api/qqyy"
         resp = self.search(data, url)
         logging.error("search api, code:{}, resp:{}".format(resp["code"], resp))
