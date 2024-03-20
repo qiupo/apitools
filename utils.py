@@ -103,7 +103,7 @@ class Utils:
     def request(self, url, data):
         # {'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A300 Safari/602.1', 'Referer': 'https://music.163.com', 'Cookie': 'os=pc;appver=2.9.7'}
         session = requests.session()
-        resp = session.post(url, data=data)
+        resp = session.get(url, params=data)
 
         print(resp.status_code)
         if resp.status_code != 200:
@@ -112,7 +112,7 @@ class Utils:
         return resp.json(), 200
 
     def search(self, data, url: str):
-        logging.info("search data:{}".format(data, url))
+        logging.info("search data:{},{}".format(data, url))
         resp, code = self.request(url, data)
         logging.info("search resp json:{}-{}".format(resp, code))
         if code == 200:
