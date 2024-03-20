@@ -74,6 +74,7 @@ class ApiTools(Plugin):
                 "data": [],
             }
             if self.utils.has_str(query, "知乎热榜"):
+                logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
                 rb_data = self.utils.search_rb(self.utils.rb_types["知乎热榜"])
             elif self.utils.has_str(query, "微博热搜"):
                 rb_data = self.utils.search_rb(self.utils.rb_types["微博热搜"])
