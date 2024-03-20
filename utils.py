@@ -69,6 +69,7 @@ class Utils:
         return title, subtitle, update_time, data
 
     def _save_mp3_tempfile(self, url, e_context, song_name):
+        logging.info("开始下载音频文件...{}".format(url))
         # 使用requests获取音频内容
         response = requests.get(url)
 
