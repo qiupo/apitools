@@ -11,8 +11,8 @@ from bridge.reply import Reply, ReplyType
     name="apitools",
     desire_priority=200,
     hidden=True,
-    desc="基于网络接口搜索音乐的插件",
-    version="0.1",
+    desc="基于网络接口的插件",
+    version="0.2",
     author="qiupo",
 )
 class Music(Plugin):
