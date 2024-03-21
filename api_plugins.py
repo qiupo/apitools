@@ -6,6 +6,7 @@ from bridge.context import ContextType
 from .utils import Utils
 from bridge.reply import ReplyType
 from plugins.event import EventContext, EventAction
+import urllib.parse
 
 
 @plugins.register(
@@ -112,7 +113,19 @@ class ApiTools(Plugin):
                             "{}. {}\n{}\n".format(
                                 index + 1,
                                 item["title"],
-                                item["mobilUrl"] if item["mobilUrl"] else item["url"],
+                                (
+                                    urllib.parse.quote(
+                                        item["mobilUrl"],
+                                        safe=";/?:@&=+$,",
+                                        encoding="utf-8",
+                                    )
+                                    if item["mobilUrl"] is not None
+                                    else urllib.parse.quote(
+                                        item["url"],
+                                        safe=";/?:@&=+$,",
+                                        encoding="utf-8",
+                                    )
+                                ),
                             )
                             for index, item in enumerate(data)
                         ]
