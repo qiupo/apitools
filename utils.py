@@ -67,6 +67,8 @@ class Utils:
         else:
             logging.error("参数缺失, code:{}, resp:{}".format(resp["code"], resp))
         res = data[:10]
+        print(res.__len__)
+        print(data.__len__)
         return title, subtitle, update_time, res
 
     def save_mp3_tempfile(self, url, e_context, song_name):

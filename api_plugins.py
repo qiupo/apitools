@@ -65,8 +65,8 @@ class ApiTools(Plugin):
             or self.utils.has_str(query, "微博热搜")
             or self.utils.has_str(query, "百度热点")
             or self.utils.has_str(query, "历史上的今天")
-            or self.utils.has_str(query, "哔哩哔哩热搜")
-            or self.utils.has_str(query, "哔哩哔哩全站日榜")
+            or self.utils.has_str(query, "bili热搜")
+            or self.utils.has_str(query, "bili全站日榜")
             or self.utils.has_str(query, "少数派头条")
         ):
             logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
@@ -99,7 +99,7 @@ class ApiTools(Plugin):
                     self.utils.rb_types["少数派头条"]
                 )
             logging.info(
-                "search rb --> {}{}{}{}".format(data, title, subtitle, update_time)
+                "search rb --> {}{}{}{}".format(data.__len__, title, subtitle, update_time)
             )
             if data.__len__ == 0:
                 content = "暂无相关数据"
@@ -151,7 +151,7 @@ class ApiTools(Plugin):
         help_text += "微博热搜\n"
         help_text += "百度热点\n"
         help_text += "历史上的今天\n"
-        help_text += "哔哩哔哩热搜\n"
-        help_text += "哔哩哔哩全站日榜\n"
+        help_text += "bili热搜\n"
+        help_text += "bili全站日榜\n"
         help_text += "少数派头条\n"
         return help_text
