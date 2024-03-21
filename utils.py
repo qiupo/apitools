@@ -19,8 +19,8 @@ class Utils:
         "微博热搜": "weibo",
         "百度热点": "baidu",
         "历史上的今天": "history",
-        "bili热搜": "bilihot",
-        "bili全站日榜": "biliall",
+        "哔哩哔哩热搜": "bilihot",
+        "哔哩哔哩全站日榜": "biliall",
         "少数派头条": "sspai",
     }
 

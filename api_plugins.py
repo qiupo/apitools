@@ -69,7 +69,6 @@ class ApiTools(Plugin):
             or self.utils.has_str(query, "bili全站日榜")
             or self.utils.has_str(query, "少数派头条")
         ):
-            logging.info("search rb --> {}".format(self.utils.rb_types["知乎热榜"]))
             if self.utils.has_str(query, "知乎热榜"):
                 title, subtitle, update_time, data = self.utils.search_rb(
                     self.utils.rb_types["知乎热榜"]
@@ -88,20 +87,17 @@ class ApiTools(Plugin):
                 )
             elif self.utils.has_str(query, "bili热搜"):
                 title, subtitle, update_time, data = self.utils.search_rb(
-                    self.utils.rb_types["bili热搜"]
+                    self.utils.rb_types["哔哩哔哩热搜"]
                 )
             elif self.utils.has_str(query, "bili全站日榜"):
                 title, subtitle, update_time, data = self.utils.search_rb(
-                    self.utils.rb_types["bili全站日榜"]
+                    self.utils.rb_types["哔哩哔哩全站日榜"]
                 )
             else:
                 title, subtitle, update_time, data = self.utils.search_rb(
                     self.utils.rb_types["少数派头条"]
                 )
-            logging.info(
-                "search rb --> {}{}{}{}".format(data.__len__, title, subtitle, update_time)
-            )
-            if data.__len__ == 0:
+            if len(data) == 0:
                 content = "暂无相关数据"
             else:
                 content = "{}{}{}\n{}".format(
