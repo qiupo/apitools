@@ -116,10 +116,14 @@ class ApiTools(Plugin):
                                         encoding="utf-8",
                                     )
                                     if item["mobilUrl"] is not None
-                                    else urllib.parse.quote(
-                                        item["url"],
-                                        safe=";/?:@&=+$,",
-                                        encoding="utf-8",
+                                    else (
+                                        urllib.parse.quote(
+                                            item["url"],
+                                            safe=";/?:@&=+$,",
+                                            encoding="utf-8",
+                                        )
+                                        if item["url"] is not None
+                                        else "暂无链接"
                                     )
                                 ),
                             )
