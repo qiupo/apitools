@@ -86,13 +86,13 @@ class ApiTools(Plugin):
                 title, subtitle, update_time, data = self.utils.search_rb(
                     self.utils.rb_types["历史上的今天"]
                 )
-            elif self.utils.has_str(query, "哔哩哔哩热搜"):
+            elif self.utils.has_str(query, "bili热搜"):
                 title, subtitle, update_time, data = self.utils.search_rb(
-                    self.utils.rb_types["哔哩哔哩热搜"]
+                    self.utils.rb_types["bili热搜"]
                 )
-            elif self.utils.has_str(query, "哔哩哔哩全站日榜"):
+            elif self.utils.has_str(query, "bili全站日榜"):
                 title, subtitle, update_time, data = self.utils.search_rb(
-                    self.utils.rb_types["哔哩哔哩全站日榜"]
+                    self.utils.rb_types["bili全站日榜"]
                 )
             else:
                 title, subtitle, update_time, data = self.utils.search_rb(
